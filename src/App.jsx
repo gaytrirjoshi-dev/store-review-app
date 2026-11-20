@@ -21,9 +21,11 @@ function App() {
   return (
     <div>
       {page === 'register' && (
-        <UserData onSuccess={() => setPage('login')} />
+        <UserData onSuccess={() => setPage('LoginPage')} />
       )}
-
+     {page === 'LoginPage' && (
+      <UserLogin onSuccess={() => setPage('shops')} onGoRegister={() => setPage('register')} />
+    )}
       {page === 'shops' && (
         <div>
           <h1 style={{ textAlign: "center" }}>Store Review App</h1>

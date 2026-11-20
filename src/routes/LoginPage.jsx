@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import './Register.css';
 
 function UserLogin({ onSuccess, onGoRegister }) {
-  const [LoginPage, setLoginPage] = useState({ email: '', password: '' });
+  const [formdata, setformdata] = useState({ email: '', password: '' });
   const [fail, setfail] = useState({});
 
   const DataSave = (data) => {
-    setLoginPage({ ...LoginPage, [data.name]: data.value });
-    setfail({ ...fail, [data.name]: '' });
+    setformdata({ ...formdata, [data.target.name]: data.target.value });
+    setfail({ ...fail, [data.target.name]: '' });
   };
 
   const InfoChecking = (IC) => {
     IC.preventDefault();
     let WrongInfo = {};
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(LoginPage.email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formdata.email)) {
       WrongInfo.email = "Please Enter Correct Email";
     }
-    if (LoginPage.password.length === 0) {
+    if (formdata.password.length === 0) {
       WrongInfo.password = "Please Enter Correct Password";
     }
 
@@ -35,11 +35,11 @@ function UserLogin({ onSuccess, onGoRegister }) {
         <p>Store Rating App - Login</p>
         <form onSubmit={InfoChecking}>
           <label>Email</label>
-          <input type="email" name="email" placeholder="gaytrirjoshi@gmail.com" value={LoginPage.email} onChange={DataSave} />
+          <input type="email" name="email" placeholder="gaytrirjoshi@gmail.com" value={formdata.email} onChange={DataSave} />
           {fail.email && <span className="Wrong">{fail.email}</span>}
 
           <label>Password</label>
-          <input type="password" name="password" placeholder="Enter Your Password" value={LoginPage.password} onChange={DataSave} />
+          <input type="password" name="password" placeholder="Enter Your Password" value={formdata.password} onChange={DataSave} />
           {fail.password && <span className="Wrong">{fail.password}</span>}
 
           <button type="submit">Login</button>
