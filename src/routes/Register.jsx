@@ -2,30 +2,31 @@ import React, { useState } from 'react';
 import './Register.css';
 
 function UserData({ onSuccess }) {
-  const [form, setForm] = useState({ name: '', email: '', address: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', address: '', password: '',  role: 'user',
+  storename: ''  });
   const [errors, setErrors] = useState({});
 
   const DataSave = (data) => {
-    setForm({ ...form, [data.target.name]: data.target.value });
+    setFormData({ ...formData, [data.target.name]: data.target.value });
     setErrors({ ...errors, [data.target.name]: '' });
   };
 
   const CorrectData = () => {
     let WrongInfo = {};
     
-    if (form.name.length < 20) WrongInfo.name = "Please Enter Your Name Minimum 20 characters";
-    else if (form.name.length > 60) WrongInfo.name = "Please Enter Your name Maximum 60 characters";
+    if (formData.name.length < 20) WrongInfo.name = "Please Enter Your Name Minimum 20 characters";
+    else if (formData.name.length > 60) WrongInfo.name = "Please Enter Your name Maximum 60 characters";
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) WrongInfo.email = "Please Enter Correct Email";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) WrongInfo.email = "Please Enter Correct Email";
 
-    if (form.address.length === 0) WrongInfo.address = "Please Enter Your Address";
-    else if (form.address.length > 400) WrongInfo.address = "Please Enter Your Address Maximum 400 characters";
+    if (formData.address.length === 0) WrongInfo.address = "Please Enter Your Address";
+    else if (formData.address.length > 400) WrongInfo.address = "Please Enter Your Address Maximum 400 characters";
 
-    if (form.password.length < 8 || form.password.length > 16) {
+    if (formData.password.length < 8 || formData.password.length > 16) {
       WrongInfo.password = "Please Enter Your Password Range In 8-16 characters";
-    } else if (!/[A-Z]/.test(form.password)) {
+    } else if (!/[A-Z]/.test(formData.password)) {
       WrongInfo.password = "Please Enter In Password Minimum 1 Uppercase letter";
-    } else if (!/[!@#$%^&*]/.test(form.password)) {
+    } else if (!/[!@#$%^&*]/.test(formData.password)) {
       WrongInfo.password = "Please Enter In Password Minimum 1 Special character";
     }
 
@@ -36,8 +37,8 @@ function UserData({ onSuccess }) {
   const InfoChecking = (IC) => {
     IC.preventDefault();
     if (CorrectData()) {
-      console.log("Submit Data:", form);
-      alert(`Welcome ${form.name}! You have successfully created your account in Store Rating App!`);
+      console.log("Submit Data:", formData);
+      alert(`Welcome ${formData.name}! You have successfully created your account in Store Rating App!`);
       onSuccess(); // <-- FAKT HI 1 LINE ADD KELI
     }
   };
@@ -49,22 +50,40 @@ function UserData({ onSuccess }) {
         <p>Store Rating App - Normal User Registration</p>
         <form onSubmit={InfoChecking}>
           <label>Name (20-60 chars)</label>
-          <input type="text" name="name" placeholder="Ex: Gayatri Ravikumar Joshi..." value={form.name} onChange={DataSave} />
+          <input type="text" name="name" placeholder="Ex: Gayatri Ravikumar Joshi..." value={formData.name} onChange={DataSave} />
           {errors.name && <span className="Wrong">{errors.name}</span>}
-          <small>{form.name.length}/60</small>
+          <small>{formData.name.length}/60</small>
 
           <label>Email</label>
-          <input type="email" name="email" placeholder="gaytrirjoshi@gmail.com" value={form.email} onChange={DataSave} />
+          <input type="email" name="email" placeholder="gaytrirjoshi@gmail.com" value={formData.email} onChange={DataSave} />
           {errors.email && <span className="Wrong">{errors.email}</span>}
 
           <label>Address (Max 400 chars)</label>
-          <textarea name="address" placeholder="Pune, Maharashtra" value={form.address} onChange={DataSave} />
+          <textarea name="address" placeholder="Pune, Maharashtra" value={formData.address} onChange={DataSave} />
           {errors.address && <span className="Wrong">{errors.address}</span>}
-          <small>{form.address.length}/400</small>
+          <small>{formData.address.length}/400</small>
 
           <label>Password (8-16 chars)</label>
-          <input type="password" name="password" placeholder="Ex: Gayatri@123" value={form.password} onChange={DataSave} />
-          {errors.password && <span className="Wrong">{errors.password}</span>}
+          <input type="password" name="password" placeholder="Ex: Gayatri@123" value={formData.password} onChange={DataSave} />
+           {errors.password && <span className="Wrong">{errors.password}</span>}
+
+          <label>Who are you?</label>
+          <div style={{ display: "flex", gap: "15px" }}>
+          <label>
+          <input type="radio" name="role" value="user" checked={formData.role === 'user'} onChange={DataSave} /> Normal User
+         </label>
+           <label>
+           <input type="radio" name="role" value="owner" checked={formData.role === 'owner'} onChange={DataSave} /> Store Owner
+           </label>
+           </div>
+
+          {formData.role === 'owner' && (
+           <>
+          <label>Please Select your Store name</label>
+         <input type="text" name="storename" placeholder="Ex: Sharma Kirana" value={formData.storename} onChange={DataSave} />
+           </>
+          )}
+         
 
           <button type="submit">Register</button>
         </form>

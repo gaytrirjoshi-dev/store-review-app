@@ -44,10 +44,17 @@
   margin-top: 10px;
   text-align: left;
    color:  hwb(155 1% 67%);
+    cursor: pointer;
 }
 
 
-.Register-card input,
+.Register-card input[type="radio"] {
+  accent-color: black !important;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 .Register-card textarea {
   width: 100%;
   padding: 12px;
