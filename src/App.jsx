@@ -33,7 +33,7 @@ const StoreList = [
 
   
   const OwnerStoreRatings = User?.storename
-    ? allRatings.filter(r => r.store.toLowerCase() === User.storename.toLowerCase())
+    ? allRatings.filter(r => r.storename?.toLowerCase() === User.storename?.toLowerCase())
     : [];
   const storeratingaverage =  OwnerStoreRatings.length > 0
     ? (OwnerStoreRatings.reduce((sum, r) => sum + r.rating, 0) / OwnerStoreRatings.length).toFixed(1)
@@ -86,23 +86,23 @@ const StoreList = [
       {page === 'owner-dashboard' && (
         <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center", padding: "20px" }}>
           <p style={{ color: "#666" }}>Welcome, Store Owner 👋</p>
-          <h1>{User?.storeName || "Owner Store"}</h1>
+          <h1>{User?.storename || "Owner Store"}</h1>
           <p>{User?.email}</p>
 
           <div style={{ background: "white", color: "black", padding: "30px", borderRadius: "24px", border: "4px solid #ddd", marginTop: "20px" }}>
             <h2 style={{ fontSize: "48px", margin: "0" }}>⭐ {storeratingaverage} / 5</h2>
             <p>Average Rating</p>
-            <p>{OwnerStoreRatings.length} Users Rated your <Stores></Stores></p>
+            <p>{OwnerStoreRatings.length} Users Rated your Store</p>
           </div>
 
           <div style={{ background: "white", color: "black", padding: "20px", borderRadius: "24px", border: "4px solid #ddd", marginTop: "20px", textAlign: "left" }}>
             <h3 style={{ textAlign: "center" }}>Who Rated You?</h3>
-            {storeRatings.length === 0 ? (
+            {OwnerStoreRatings.length === 0 ? (
               <p style={{ textAlign: "center" }}>No ratings yet for your store.</p>
             ) : (
               OwnerStoreRatings.map((r, i) => (
                 <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #eee" }}>
-                  <span>{r.user}</span>
+                  <span>{r.username}</span>
                   <span>{"⭐".repeat(r.rating)} ({r.rating}/5)</span>
                 </div>
               ))
