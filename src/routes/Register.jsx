@@ -61,6 +61,7 @@ function UserData({ onSuccess }) {
         <div style={{ display: "flex", gap: "15px" }}>
           <label><input type="radio" name="role" value="user" checked={formData.role === 'user'} onChange={DataSave} /> Normal User</label>
           <label><input type="radio" name="role" value="owner" checked={formData.role === 'owner'} onChange={DataSave} /> Store Owner</label>
+          <label><input type="radio" name="role" value="admin" checked={formData.role === 'admin'} onChange={DataSave} /> Admin </label>
         </div>
         {formData.role === 'owner' && (<><label>Please Select your Store name</label><input type="text" name="storename" placeholder="Ex: Sharma Kirana" value={formData.storename} onChange={DataSave} /></>)}
         <button type="submit">Register</button>

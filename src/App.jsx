@@ -1,6 +1,8 @@
 import { useState } from 'react';
+
 import UserData from './routes/Register';
 import UserLogin from './routes/LoginPage';
+import AdminDashboard from './routes/AdminDashboard';
 
 function App() {
   const [page, setPage] = useState('register')
@@ -47,14 +49,16 @@ const StoreList = [
       {page === 'LoginPage' && (
         <UserLogin
           
-          onSuccess={(user) => {
-            setUser(user);
-            if (user && user.role === 'owner') {
-              setPage('owner-dashboard');
-            } else {
-              setPage('stores');
-            }
-          }}
+         onSuccess={(user) => {
+       setUser(user);
+       if (user && user.role === 'admin') {
+       setPage('admin-dashboard'); // 👈 1. ADMIN LA ITHE PATHAVNAR
+       } else if (user && user.role === 'owner') {
+       setPage('owner-dashboard');
+       } else {
+       setPage('stores');
+       }
+     }}
           onGoRegister={() => setPage('register')}
         />
       )}
@@ -94,6 +98,7 @@ const StoreList = [
             <p>Average Rating</p>
             <p>{OwnerStoreRatings.length} Users Rated your Store</p>
           </div>
+        
 
           <div style={{ background: "white", color: "black", padding: "20px", borderRadius: "24px", border: "4px solid #ddd", marginTop: "20px", textAlign: "left" }}>
             <h3 style={{ textAlign: "center" }}>Who Rated You?</h3>
@@ -112,7 +117,9 @@ const StoreList = [
           <button onClick={() => setPage('LoginPage')} style={{ marginTop: "20px", padding: "10px 20px", cursor: "pointer" }}>Logout</button>
         </div>
       )}
-      
+      {page === 'admin-dashboard' && (
+  <AdminDashboard onLogout={() => setPage('LoginPage')} />
+)}
     </div>
   )
 }
