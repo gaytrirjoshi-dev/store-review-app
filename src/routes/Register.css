@@ -1,0 +1,102 @@
+
+.Register-container {
+  min-height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+}
+
+.Register-card {
+  background: hsl(186, 80%, 79%);
+  width: 150%;
+  max-width: 450px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+   justify-content: center;
+  align-items: center;
+}
+
+.Register-card h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.Register-card p {
+  text-align: center;
+  color: hsl(155, 96%, 17%);
+  margin-bottom: 20px;
+}
+
+.Register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: hwb(155 1% 67%);
+}
+
+.Register-card label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: left;
+   color:  hwb(155 1% 67%);
+    cursor: pointer;
+}
+
+
+.Register-card input[type="radio"] {
+  accent-color: black !important;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.Register-card textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid hsl(265, 46%, 5%);
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.Register-card textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.Register-card button {
+  margin-top: 20px;
+  padding: 13px;
+  background: #f51616;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.Register-card button:hover {
+  background: lab(46.31% 44.21 -75.58);
+}
+
+.Wrong {
+  color: red;
+  font-size: 13px;
+  text-align: left;
+}
+
+.login-link {
+  margin-top: 15px;
+}
+
+.login-link a {
+  color: #4a6cf7;
+  text-decoration: none;
+  font-weight: 600;
+}
